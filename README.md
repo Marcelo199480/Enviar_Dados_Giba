@@ -1,77 +1,79 @@
-```python
-import json
+#arquivo .style.yapf na raiz do projeto
 
-class JsonManager:
-    def __init__(self, filename):
-        self.filename = filename
-        self.data = self.read_json_file()
+[style]
+based_on_style = pep8
 
-    def read_json_file(self):
-        try:
-            with open(self.filename, 'r') as f:
-                return json.load(f)
-        except FileNotFoundError:
-            return []
+# Limite de comprimento de linha
+COLUMN_LIMIT = 88
 
-    def write_json_file(self):
-        with open(self.filename, 'w') as f:
-            json.dump(self.data, f, indent=4)
+# Indentação
+INDENT_WIDTH = 4
+USE_TABS = False
 
-    def find_by_id(self, id):
-        for item in self.data:
-            if item['id'] == id:
-                return item
-        return None
+# Quebra de linha em coleções
+SPLIT_BEFORE_EXPRESSION_AFTER_OPENING_PAREN = True
+SPLIT_BEFORE_FIRST_ARGUMENT = True
+SPLIT_BEFORE_NAMED_ASSIGNS = True
+SPLIT_BEFORE_DICT_SET_GENERATOR = True
+SPLIT_COMPLEX_COMPREHENSION = True
 
-    def add_item(self, item):
-        self.data.append(item)
-        self.write_json_file()
+# Fechamento de coleções
+DEDENT_CLOSING_BRACKETS = True
+COALESCE_BRACKETS = False
 
-    def update_item(self, id, new_item):
-        for i, item in enumerate(self.data):
-            if item['id'] == id:
-                self.data[i] = new_item
-                self.write_json_file()
-                break
-        else:
-            print(f"No item found with id {id}")
+# Vírgula ao final de coleções
+ALLOW_MULTILINE_LAMBDAS = False
+EACH_DICT_ENTRY_ON_SEPARATE_LINE = True
 
-    def remove_item(self, id):
-        self.data = [item for item in self.data if item['id'] != id]
-        self.write_json_file()
+# Espaçamento
+SPACES_AROUND_POWER_OPERATOR = True
+SPACES_AROUND_DEFAULT_OR_NAMED_ASSIGN = True
+SPACES_BEFORE_COMMENT = 2
 
-# Example usage
-filename = "example.json"
-manager = JsonManager(filename)
-
-# Add items
-items = [
-    {"id": 1, "valor1": 1, "valor2": 2},
-    {"id": 2, "valor1": 3, "valor2": 4},
-    {"id": 3, "valor1": 5, "valor2": 6}
-]
-
-for item in items:
-    manager.add_item(item)
-
-# Search for an item by ID
-id_to_search = 2
-found_item = manager.find_by_id(id_to_search)
-
-if found_item:
-    print(f"Found item with id {id_to_search}:")
-    print(json.dumps(found_item, indent=4))
-else:
-    print(f"No item found with id {id_to_search}")
-
-# Update an item
-updated_item = {"id": 2, "valor1": 100, "valor2": 200}
-manager.update_item(2, updated_item)
-
-# Remove an item
-manager.remove_item(3)
-
-# Print the final list of items
-print("\nFinal list of items:")
-print(json.dumps(manager.data, indent=4))
-```
+#- **based_on_style = pep8**  
+#  Usa o estilo PEP8 como base para as demais configurações.
+#
+#- **COLUMN_LIMIT = 88**  
+#  Define o comprimento máximo de cada linha antes de quebrar (default do Black).
+#
+#- **INDENT_WIDTH = 4**  
+#  Define a largura da indentação (4 espaços por nível).
+#
+#- **USE_TABS = False**  
+#  Usa espaços ao invés de tabulações para indentar.
+#
+#- **SPLIT_BEFORE_EXPRESSION_AFTER_OPENING_PAREN = True**  
+#  Quebra a linha logo após o parêntese de abertura em expressões longas.
+#
+#- **SPLIT_BEFORE_FIRST_ARGUMENT = True**  
+#  Quebra a linha antes do primeiro argumento em chamadas de função longas.
+#
+#- **SPLIT_BEFORE_NAMED_ASSIGNS = True**  
+#  Quebra a linha antes de argumentos nomeados em chamadas de função.
+#
+#- **SPLIT_BEFORE_DICT_SET_GENERATOR = True**  
+#  Quebra a linha antes de um gerador de dicionário ou conjunto.
+#
+#- **SPLIT_COMPLEX_COMPREHENSION = True**  
+#  Quebra compreensões (list/dict/set comprehensions) complexas em várias linhas.
+#
+#- **DEDENT_CLOSING_BRACKETS = True**  
+#  Fecha colchetes, chaves ou parênteses alinhados com a linha de abertura, não com o conteúdo interno.
+#
+#- **COALESCE_BRACKETS = False**  
+#  Não tenta juntar várias coleções aninhadas em uma única linha.
+#
+#- **ALLOW_MULTILINE_LAMBDAS = False**  
+#  Não permite que lambdas sejam divididas em várias linhas.
+#
+#- **EACH_DICT_ENTRY_ON_SEPARATE_LINE = True**  
+#  Cada entrada de dicionário fica em uma linha separada.
+#
+#- **SPACES_AROUND_POWER_OPERATOR = True**  
+#  Adiciona espaços ao redor do operador de potência (`**`).
+#
+#- **SPACES_AROUND_DEFAULT_OR_NAMED_ASSIGN = True**  
+#  Adiciona espaços ao redor de `=` em argumentos nomeados ou valores padrão.
+#
+#- **SPACES_BEFORE_COMMENT = 2**  
+#  Garante dois espaços antes de comentários em linha.
